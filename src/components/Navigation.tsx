@@ -55,7 +55,7 @@ const Navigation = () => {
         }`}
       >
         <div className="">
-          <div className="flex items-center justify-between h-16 sm:h-20">
+          <div className="flex items-center justify-between h-16 sm:h-20 px-6">
             {/* Logo */}
             <motion.button
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}

@@ -111,7 +111,7 @@ const HeroSection = () => {
       />
 
       <motion.div
-        className="section-container relative z-10 text-center"
+        className="section-container relative z-10 text-center mt-8 py-6"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -135,7 +135,7 @@ const HeroSection = () => {
 
         {/* Main heading */}
         <motion.div variants={itemVariants}>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6">
+          <h1 className="flex gap-2 justify-center text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6">
             <motion.span
               className="block text-foreground mb-2"
               initial={{ opacity: 0, x: -50 }}
