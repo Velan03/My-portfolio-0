@@ -87,7 +87,7 @@ const HeroSection = () => {
             <div>📧 velansivasanakaran15@gmail.com</div>
             <div>🔗 linkedin.com/in/velan-s-845791250</div>
             <div>💻 github.com/velan03</div>
-            <div>🌐 velan-s.netlify.app</div>
+            <div>🌐 https://velan-s.vercel.app</div>
           </div>
           
           <h2>Professional Summary</h2>

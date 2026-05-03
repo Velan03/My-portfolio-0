@@ -104,7 +104,7 @@ const portfolioData = {
     email: "velansivasanakaran15@gmail.com",
     github: "github.com/velan03",
     linkedin: "linkedin.com/in/velan-s-845791250",
-    portfolio: "velan-s.netlify.app",
+    portfolio: "https://velan-s.vercel.app",
   },
   resumeUrl: "/resume/Velan_Resume.pdf"
 };

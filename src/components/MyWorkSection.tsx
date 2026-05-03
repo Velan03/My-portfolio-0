@@ -102,7 +102,7 @@ const projectsData: Project[] = [
     category: "website",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     githubUrl: "https://github.com/velan03/My-portfolio-0",
-    liveUrl: "https://velan-s.netlify.app",
+    liveUrl: "https://velan-s.vercel.app",
     imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
     bgGradient: "from-purple-600 to-pink-600",
     featured: true,
