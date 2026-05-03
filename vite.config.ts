@@ -12,8 +12,15 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: false,
-    minify: 'terser',
-    chunkSizeWarningLimit: 1000,
+    rollupOptions: {
+      external: [],
+      output: {
+        globals: {},
+      },
+    },
+  },
+  optimizeDeps: {
+    include: ['react', 'react-dom', 'framer-motion', 'lucide-react'],
   },
   server: {
     port: 8080,
