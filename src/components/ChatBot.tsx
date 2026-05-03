@@ -398,7 +398,7 @@ const ProjectsShowcase: React.FC = () => {
                   alt={selectedProject.title}
                   className="w-full h-full object-cover"
                 />
-                <button
+                <button title="btn"
                   onClick={() => setSelectedProject(null)}
                   className="absolute top-4 right-4 p-2 rounded-full bg-black/50 hover:bg-black/70 transition-colors"
                 >
