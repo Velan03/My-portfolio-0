@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Github, 
@@ -12,7 +12,8 @@ import {
   Heart,
   Star,
   GitFork,
-  Eye
+  Eye,
+  Sparkles
 } from "lucide-react";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
@@ -27,7 +28,7 @@ interface Project {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
-  image: string;
+  image?: string;
   featured: boolean;
   stats?: {
     stars?: number;
@@ -41,12 +42,11 @@ const projectsData: Project[] = [
     id: 1,
     title: "Human Resource Management System (HRMS)",
     description: "Enterprise HR platform with role-based dashboards for attendance, leave approval, and analytics.",
-    longDescription: "A comprehensive HR management system serving 500+ concurrent users with Micro Frontend architecture. Features include real-time attendance tracking, automated payroll processing, employee self-service portals, and advanced analytics dashboards.",
+    longDescription: "A comprehensive HR management system serving 500+ concurrent users with Micro Frontend architecture. Features include real-time attendance tracking, automated payroll processing, employee self-service portals, and advanced analytics dashboards. Built with Angular and NgRx for state management.",
     category: "fullstack",
-    technologies: ["Angular", "NgRx", "PrimeNG", "Bootstrap 5", "TypeScript", "Node.js", "MongoDB"],
+    technologies: ["Angular", "NgRx", "PrimeNG", "TypeScript", "Node.js", "MongoDB"],
     githubUrl: "https://github.com/velan03/hrms-system",
-    liveUrl: "https://hrms-demo.vercel.app",
-    image: "/projects/hrms.jpg",
+    liveUrl: "",
     featured: true,
     stats: { stars: 45, forks: 12, views: 1200 }
   },
@@ -54,25 +54,23 @@ const projectsData: Project[] = [
     id: 2,
     title: "AI-Powered Chat Application",
     description: "ChatGPT-style conversational UI with real-time streaming and GenAI/LLM backend.",
-    longDescription: "Built a sophisticated chat application integrating with OpenAI's GPT API featuring real-time message streaming, conversation history, code syntax highlighting, and markdown support. Containerized with Docker for scalable deployments.",
+    longDescription: "A sophisticated chat application integrating with OpenAI's GPT API featuring real-time message streaming, conversation history, code syntax highlighting, and markdown support. Containerized with Docker for scalable deployments.",
     category: "ai-ml",
-    technologies: ["React.js", "TypeScript", "Node.js", "WebSockets", "Redux", "Docker", "OpenAI API"],
+    technologies: ["React.js", "TypeScript", "Node.js", "WebSockets", "Redux", "Docker"],
     githubUrl: "https://github.com/velan03/ai-chat-app",
-    liveUrl: "https://ai-chat.vercel.app",
-    image: "/projects/ai-chat.jpg",
+    liveUrl: "",
     featured: true,
     stats: { stars: 128, forks: 34, views: 3500 }
   },
   {
     id: 3,
-    title: "Healthcare Appointment Platform",
+    title: "AI-FACE-MASK DETECTION",
     description: "Appointment booking system with secure role-based access for patients and doctors.",
     longDescription: "A HIPAA-compliant healthcare platform enabling patients to book appointments, video consultations, prescription management, and medical records access. Features real-time availability tracking and automated reminders.",
     category: "fullstack",
-    technologies: ["Angular", "PrimeNG", "Bootstrap 5", "NgRx", "TypeScript", "Spring Boot", "PostgreSQL"],
-    githubUrl: "https://github.com/velan03/healthcare-platform",
-    liveUrl: "https://healthcare-demo.vercel.app",
-    image: "/projects/healthcare.jpg",
+    technologies: ["Angular", "PrimeNG", "NgRx", "TypeScript", "Spring Boot", "PostgreSQL"],
+    githubUrl: "https://github.com/velan03//AI-FACE-MASK-DETECTION",
+    // liveUrl: "https://healthcare-demo.vercel.app",
     featured: true,
     stats: { stars: 67, forks: 18, views: 2100 }
   },
@@ -82,10 +80,9 @@ const projectsData: Project[] = [
     description: "Full-stack flower e-commerce platform with dynamic catalog and secure checkout.",
     longDescription: "A modern e-commerce platform featuring product catalog with filters, shopping cart, wishlist, user authentication, order tracking, and payment integration. Optimized UX reduced cart abandonment by 30%.",
     category: "ecommerce",
-    technologies: ["React.js", "Tailwind CSS", "Bootstrap 5", "Material UI", "JavaScript", "MongoDB", "Stripe"],
+    technologies: ["React.js", "Tailwind CSS", "Material UI", "JavaScript", "MongoDB", "Stripe"],
     githubUrl: "https://github.com/velan03/flower-shop",
     liveUrl: "https://flower-shop.vercel.app",
-    image: "/projects/ecommerce.jpg",
     featured: true,
     stats: { stars: 89, forks: 23, views: 3100 }
   },
@@ -93,39 +90,36 @@ const projectsData: Project[] = [
     id: 5,
     title: "Portfolio Website 2025",
     description: "Modern portfolio with 3D animations and interactive UI components.",
-    longDescription: "A cutting-edge portfolio website featuring 3D animations using Three.js, smooth scroll animations, dark/light mode, and an AI-powered chatbot assistant. Built with performance and accessibility in mind.",
+    longDescription: "A cutting-edge portfolio website featuring smooth scroll animations, dark/light mode, and an AI-powered chatbot assistant. Built with performance and accessibility in mind using modern React patterns.",
     category: "website",
-    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion", "Three.js"],
-    githubUrl: "https://github.com/velan03/portfolio-2025",
+    technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+    githubUrl: "https://github.com/velan03/My-portfolio-0",
     liveUrl: "https://velan-s.netlify.app",
-    image: "/projects/portfolio.jpg",
     featured: true,
     stats: { stars: 156, forks: 42, views: 5000 }
   },
   {
     id: 6,
-    title: "Computer Vision Object Detection",
-    description: "Real-time object detection using YOLO and OpenCV with webcam integration.",
-    longDescription: "Built a real-time object detection system using YOLOv8 and OpenCV. Features include live webcam detection, image upload processing, and custom model training capabilities. Achieved 92% accuracy on COCO dataset.",
-    category: "ai-ml",
-    technologies: ["Python", "OpenCV", "TensorFlow", "YOLO", "Flask", "React"],
-    githubUrl: "https://github.com/velan03/object-detection",
-    image: "/projects/object-detection.jpg",
-    featured: false,
-    stats: { stars: 234, forks: 56, views: 8900 }
-  },
-  {
-    id: 7,
     title: "Task Management Dashboard",
     description: "Kanban-style task manager with drag-drop and team collaboration features.",
     longDescription: "A Trello-like task management system with drag-and-drop functionality, team workspaces, real-time updates, file attachments, and activity logging. Built for small to medium teams.",
     category: "website",
-    technologies: ["React", "Redux", "Node.js", "Socket.io", "MongoDB", "Tailwind CSS"],
+    technologies: ["React", "Redux", "Node.js", "Socket.io", "MongoDB"],
     githubUrl: "https://github.com/velan03/task-dashboard",
-    liveUrl: "https://task-dashboard.vercel.app",
-    image: "/projects/task-dashboard.jpg",
+    liveUrl: " ",
     featured: false,
     stats: { stars: 67, forks: 15, views: 1800 }
+  },
+  {
+    id: 7,
+    title: "Computer Vision Object Detection",
+    description: "Real-time object detection using YOLO and OpenCV with webcam integration.",
+    longDescription: "Built a real-time object detection system using YOLOv8 and OpenCV. Features include live webcam detection, image upload processing, and custom model training capabilities.",
+    category: "ai-ml",
+    technologies: ["Python", "OpenCV", "TensorFlow", "Flask", "React"],
+    githubUrl: "https://github.com/velan03/object-detection",
+    featured: false,
+    stats: { stars: 234, forks: 56, views: 8900 }
   },
   {
     id: 8,
@@ -133,350 +127,384 @@ const projectsData: Project[] = [
     description: "Modern fashion store with AI-powered size recommendations.",
     longDescription: "An innovative fashion e-commerce platform featuring AI-powered size recommendations, virtual try-on, personalized product suggestions, and seamless checkout experience.",
     category: "ecommerce",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "Prisma", "PostgreSQL"],
-    githubUrl: "https://github.com/velan03/fashion-store",
-    liveUrl: "https://fashion-store.vercel.app",
-    image: "/projects/fashion-store.jpg",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "PostgreSQL"],
+    githubUrl: "https://github.com/velan03/like-n-pick",
+    liveUrl: "https://like-n-pick.vercel.app/",
     featured: false,
     stats: { stars: 45, forks: 11, views: 1500 }
   }
 ];
 
 const categories = [
-  { id: "all", label: "All Projects", icon: Code2 },
-  { id: "website", label: "Websites", icon: Layout },
-  { id: "ai-ml", label: "AI/ML", icon: Bot },
-  { id: "ecommerce", label: "E-Commerce", icon: ShoppingCart },
-  { id: "fullstack", label: "Full Stack", icon: Heart }
+  { id: "all", label: "All Projects", icon: Code2, color: "from-blue-500 to-cyan-500" },
+  { id: "website", label: "Websites", icon: Layout, color: "from-purple-500 to-pink-500" },
+  { id: "ai-ml", label: "AI/ML", icon: Bot, color: "from-green-500 to-emerald-500" },
+  { id: "ecommerce", label: "E-Commerce", icon: ShoppingCart, color: "from-orange-500 to-red-500" },
+  { id: "fullstack", label: "Full Stack", icon: Heart, color: "from-indigo-500 to-blue-500" }
 ];
 
-const ProjectsSection = () => {
+const ProjectsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
+  const projectsPerPage = isMobile ? 1 : 3;
   const filteredProjects = selectedCategory === "all" 
     ? projectsData 
     : projectsData.filter(p => p.category === selectedCategory);
+  
+  const totalPages = Math.ceil(filteredProjects.length / projectsPerPage);
+  const visibleProjects = filteredProjects.slice(
+    currentPage * projectsPerPage, 
+    (currentPage + 1) * projectsPerPage
+  );
 
-  const visibleProjects = filteredProjects.slice(currentIndex, currentIndex + 3);
-
+  // Check screen size
   useEffect(() => {
-    if (isAutoPlaying && filteredProjects.length > 3) {
+    const checkScreen = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkScreen();
+    window.addEventListener('resize', checkScreen);
+    return () => window.removeEventListener('resize', checkScreen);
+  }, []);
+
+  // Auto-play functionality
+  useEffect(() => {
+    if (totalPages > 1) {
       autoPlayRef.current = setInterval(() => {
-        setCurrentIndex((prev) => 
-          prev + 3 >= filteredProjects.length ? 0 : prev + 3
-        );
-      }, 5000);
+        setCurrentPage((prev) => (prev + 1) % totalPages);
+      }, 6000);
     }
     return () => {
       if (autoPlayRef.current) clearInterval(autoPlayRef.current);
     };
-  }, [isAutoPlaying, filteredProjects.length]);
+  }, [totalPages]);
 
-  const handlePrev = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => 
-      prev - 3 < 0 ? Math.max(0, filteredProjects.length - 3) : prev - 3
-    );
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
+  const handlePrev = useCallback(() => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+    setTimeout(() => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+      autoPlayRef.current = setInterval(() => {
+        setCurrentPage((prev) => (prev + 1) % totalPages);
+      }, 6000);
+    }, 10000);
+  }, [totalPages]);
 
-  const handleNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prev) => 
-      prev + 3 >= filteredProjects.length ? 0 : prev + 3
-    );
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
+  const handleNext = useCallback(() => {
+    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+    setTimeout(() => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+      autoPlayRef.current = setInterval(() => {
+        setCurrentPage((prev) => (prev + 1) % totalPages);
+      }, 6000);
+    }, 10000);
+  }, [totalPages]);
 
   const getCategoryIcon = (category: string) => {
-    switch(category) {
-      case "website": return Layout;
-      case "ai-ml": return Bot;
-      case "ecommerce": return ShoppingCart;
-      default: return Heart;
-    }
+    const found = categories.find(c => c.id === category);
+    return found?.icon || Heart;
+  };
+
+  const getCategoryColor = (category: string) => {
+    const found = categories.find(c => c.id === category);
+    return found?.color || "from-primary to-accent";
   };
 
   return (
-    <section id="projects" className="relative py-20 sm:py-28 overflow-hidden bg-gradient-to-b from-background to-secondary/20">
-      {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/5 rounded-full blur-3xl" />
+    <section id="projects" className="relative py-16 sm:py-20 md:py-28 overflow-hidden">
+      {/* Background decoration - optimized for performance */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-20 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-primary/5 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-accent/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-10 sm:mb-14 md:mb-16"
         >
-          <Badge className="mb-4 px-4 py-2 text-sm bg-gradient-to-r from-primary/20 to-accent/20 border-none">
-            <Code2 className="w-4 h-4 mr-2" />
+          <Badge className="mb-3 sm:mb-4 px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm bg-gradient-to-r from-primary/20 to-accent/20 border-none">
+            <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
             My Work
           </Badge>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-3">
             Featured{" "}
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Projects
             </span>
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
             Explore my collection of web applications, AI/ML projects, and full-stack solutions
           </p>
         </motion.div>
 
-        {/* Category Filters */}
+        {/* Category Filters - Scrollable on mobile */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12"
+          transition={{ duration: 0.5, delay: 0.1 }}
+          viewport={{ once: true }}
+          className="mb-8 sm:mb-12 overflow-x-auto scrollbar-hide"
         >
-          {categories.map((category) => {
-            const Icon = category.icon;
-            return (
-              <button
-                key={category.id}
-                onClick={() => {
-                  setSelectedCategory(category.id);
-                  setCurrentIndex(0);
-                  setIsAutoPlaying(true);
-                }}
-                className={`group relative px-5 py-2.5 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
-                  selectedCategory === category.id
-                    ? "bg-gradient-to-r from-primary to-accent text-white shadow-lg shadow-primary/30"
-                    : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
-                }`}
-              >
-                <Icon className="w-4 h-4" />
-                <span>{category.label}</span>
-                {selectedCategory === category.id && (
-                  <motion.div
-                    layoutId="activeCategory"
-                    className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent -z-10"
-                    transition={{ type: "spring", duration: 0.5 }}
-                  />
-                )}
-              </button>
-            );
-          })}
+          <div className="flex flex-nowrap sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 pb-2 sm:pb-0">
+            {categories.map((category) => {
+              const Icon = category.icon;
+              const isActive = selectedCategory === category.id;
+              return (
+                <button
+                  key={category.id}
+                  onClick={() => {
+                    setSelectedCategory(category.id);
+                    setCurrentPage(0);
+                  }}
+                  className={`relative flex-shrink-0 px-3 sm:px-5 py-1.5 sm:py-2.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 flex items-center gap-1 sm:gap-2 ${
+                    isActive
+                      ? "text-white shadow-lg"
+                      : "bg-secondary/50 text-muted-foreground hover:bg-secondary hover:text-foreground"
+                  }`}
+                  style={isActive ? {
+                    background: `linear-gradient(135deg, ${category.color.split(' ')[1].replace('to-', '')}, ${category.color.split(' ')[2]})`
+                  } : {}}
+                >
+                  <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
+                  <span className="whitespace-nowrap">{category.label}</span>
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeCategory"
+                      className="absolute inset-0 rounded-full -z-10"
+                      transition={{ type: "spring", duration: 0.5 }}
+                      style={{
+                        background: `linear-gradient(135deg, ${category.color.split(' ')[1].replace('to-', '')}, ${category.color.split(' ')[2]})`
+                      }}
+                    />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </motion.div>
 
         {/* Projects Carousel */}
-        <div className="relative px-4 sm:px-0">
-          {filteredProjects.length > 3 && (
+        <div className="relative">
+          {/* Navigation Buttons - Hidden on mobile when only one page */}
+          {totalPages > 1 && (
             <>
-              <button title="btn"
+              <button
                 onClick={handlePrev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-50"
+                aria-label="Previous projects"
               >
-                <ChevronLeft className="w-6 h-6" />
+                <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
-              <button title="btn"
+              <button
                 onClick={handleNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-50"
+                aria-label="Next projects"
               >
-                <ChevronRight className="w-6 h-6" />
+                <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </>
           )}
 
-          <div className="overflow-hidden">
-            <motion.div
-              ref={containerRef}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5 }}
-            >
-              <AnimatePresence mode="wait">
+          {/* Projects Grid */}
+          <div className="px-0 sm:px-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${selectedCategory}-${currentPage}`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.4 }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6"
+              >
                 {visibleProjects.map((project, idx) => {
                   const CategoryIcon = getCategoryIcon(project.category);
+                  const categoryColor = getCategoryColor(project.category);
+                  
                   return (
                     <motion.div
-                      key={`${selectedCategory}-${project.id}`}
-                      initial={{ opacity: 0, y: 30 }}
+                      key={project.id}
+                      initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -30 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
-                      whileHover={{ y: -8 }}
+                      whileHover={{ y: -4 }}
                       onHoverStart={() => setHoveredProject(project.id)}
                       onHoverEnd={() => setHoveredProject(null)}
+                      className="h-full"
                     >
-                      <Card className="group h-full overflow-hidden bg-gradient-to-br from-card to-secondary/30 border-border/50 hover:border-primary/30 transition-all duration-300">
-                        {/* Project Image Placeholder */}
-                        <div className="relative h-48 bg-gradient-to-br from-primary/20 to-accent/20 overflow-hidden">
+                      <Card className="group relative h-full overflow-hidden bg-gradient-to-br from-card to-secondary/30 border-border/50 hover:border-primary/30 transition-all duration-300">
+                        {/* Project Header with Gradient */}
+                        <div className={`relative h-32 sm:h-36 md:h-40 bg-gradient-to-br ${categoryColor} opacity-90 overflow-hidden`}>
                           <div className="absolute inset-0 flex items-center justify-center">
-                            <CategoryIcon className="w-16 h-16 text-primary/30" />
+                            <CategoryIcon className="w-12 h-12 sm:w-16 sm:h-16 text-white/20" />
                           </div>
-                          <motion.div
-                            className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"
-                            initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 0.6 }}
-                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                          
                           {project.featured && (
-                            <div className="absolute top-4 right-4">
-                              <Badge className="bg-gradient-to-r from-primary to-accent text-white">
-                                <Star className="w-3 h-3 mr-1 fill-current" />
+                            <div className="absolute top-3 right-3">
+                              <Badge className="bg-black/50 backdrop-blur-sm text-white border-none text-[10px] sm:text-xs">
+                                <Star className="w-2 h-2 sm:w-3 sm:h-3 mr-1 fill-current" />
                                 Featured
                               </Badge>
                             </div>
                           )}
                         </div>
 
-                        <div className="p-6">
-                          <div className="flex items-start justify-between mb-3">
-                            <div>
-                              <div className="flex items-center gap-2 mb-2">
-                                <CategoryIcon className="w-4 h-4 text-primary" />
-                                <span className="text-xs text-muted-foreground capitalize">
-                                  {project.category}
-                                </span>
-                              </div>
-                              <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">
-                                {project.title}
-                              </h3>
+                        <div className="p-4 sm:p-5">
+                          <div className="mb-3">
+                            <div className="flex items-center gap-2 mb-2">
+                              <CategoryIcon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+                              <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">
+                                {project.category}
+                              </span>
                             </div>
+                            <h3 className=" text-base sm:text-lg md:text-xl font-bold mb-1 mt-11 sm:mb-2 line-clamp-1 group-hover:text-primary transition-colors">
+                              {project.title}
+                            </h3>
+                            <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
+                              {project.description}
+                            </p>
                           </div>
 
-                          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                            {project.description}
-                          </p>
-
                           {/* Technologies */}
-                          <div className="flex flex-wrap gap-2 mb-4">
+                          <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                             {project.technologies.slice(0, 3).map((tech) => (
                               <span
                                 key={tech}
-                                className="text-xs px-2 py-1 bg-secondary rounded-full"
+                                className="text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 bg-secondary rounded-full"
                               >
                                 {tech}
                               </span>
                             ))}
                             {project.technologies.length > 3 && (
-                              <span className="text-xs px-2 py-1 bg-secondary rounded-full">
+                              <span className="text-[9px] sm:text-xs px-1.5 py-0.5 sm:px-2 sm:py-1 bg-secondary rounded-full">
                                 +{project.technologies.length - 3}
                               </span>
                             )}
                           </div>
 
-                          {/* Project Stats */}
+                          {/* Stats */}
                           {project.stats && (
-                            <div className="flex items-center gap-4 mb-4 text-xs text-muted-foreground">
+                            <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4 text-[10px] sm:text-xs text-muted-foreground">
                               {project.stats.stars && (
-                                <span className="flex items-center gap-1">
-                                  <Star className="w-3 h-3" /> {project.stats.stars}
+                                <span className="flex items-center gap-0.5 sm:gap-1">
+                                  <Star className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> {project.stats.stars}
                                 </span>
                               )}
                               {project.stats.forks && (
-                                <span className="flex items-center gap-1">
-                                  <GitFork className="w-3 h-3" /> {project.stats.forks}
+                                <span className="flex items-center gap-0.5 sm:gap-1">
+                                  <GitFork className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> {project.stats.forks}
                                 </span>
                               )}
                               {project.stats.views && (
-                                <span className="flex items-center gap-1">
-                                  <Eye className="w-3 h-3" /> {project.stats.views}
+                                <span className="flex items-center gap-0.5 sm:gap-1">
+                                  <Eye className="w-2.5 h-2.5 sm:w-3 sm:h-3" /> {project.stats.views}
                                 </span>
                               )}
                             </div>
                           )}
 
-                          {/* Action Buttons */}
-                          <div className="flex gap-3">
+                          {/* Buttons */}
+                          <div className="flex gap-2">
                             <Button
                               size="sm"
                               variant="outline"
-                              className="flex-1 group/btn"
+                              className="flex-1 h-8 sm:h-9 text-xs sm:text-sm"
                               onClick={() => window.open(project.githubUrl, "_blank")}
                             >
-                              <Github className="w-4 h-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
-                              GitHub
+                              <Github className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                              Code
                             </Button>
                             {project.liveUrl && (
                               <Button
                                 size="sm"
-                                className="flex-1 bg-gradient-to-r from-primary to-accent hover:opacity-90"
+                                className={`flex-1 h-8 sm:h-9 text-xs sm:text-sm bg-gradient-to-r ${categoryColor} hover:opacity-90`}
                                 onClick={() => window.open(project.liveUrl, "_blank")}
                               >
-                                <ExternalLink className="w-4 h-4 mr-2" />
-                                Live Demo
+                                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                                Demo
                               </Button>
                             )}
                           </div>
                         </div>
 
-                        {/* Hover Details */}
-                        <AnimatePresence>
-                          {hoveredProject === project.id && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 20 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: 20 }}
-                              className="absolute inset-0 bg-gradient-to-br from-primary/95 to-accent/95 backdrop-blur-sm p-6 flex flex-col justify-between"
-                            >
-                              <div>
-                                <h4 className="text-white font-bold mb-2">Details</h4>
-                                <p className="text-white/80 text-sm mb-4 line-clamp-4">
-                                  {project.longDescription}
-                                </p>
-                              </div>
-                              <div className="flex gap-2">
+                        {/* Hover Overlay - Desktop only */}
+                        {hoveredProject === project.id && !isMobile && (
+                          <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="absolute inset-0 bg-gradient-to-br from-primary/95 to-accent/95 backdrop-blur-sm p-4 sm:p-5 flex flex-col justify-between"
+                          >
+                            <div>
+                              <h4 className="text-white font-bold text-sm sm:text-base mb-2">About this project</h4>
+                              <p className="text-white/80 text-xs sm:text-sm line-clamp-5">
+                                {project.longDescription}
+                              </p>
+                            </div>
+                            <div className="flex gap-2 mt-3">
+                              <Button
+                                size="sm"
+                                variant="secondary"
+                                className="flex-1 h-8 text-xs"
+                                onClick={() => window.open(project.githubUrl, "_blank")}
+                              >
+                                <Github className="w-3 h-3 mr-1" />
+                                View Code
+                              </Button>
+                              {project.liveUrl && (
                                 <Button
                                   size="sm"
-                                  variant="secondary"
-                                  className="flex-1"
-                                  onClick={() => window.open(project.githubUrl, "_blank")}
+                                  className="flex-1 h-8 text-xs bg-white text-primary hover:bg-white/90"
+                                  onClick={() => window.open(project.liveUrl, "_blank")}
                                 >
-                                  <Github className="w-4 h-4 mr-2" />
-                                  View Code
+                                  <ExternalLink className="w-3 h-3 mr-1" />
+                                  Live Demo
                                 </Button>
-                                {project.liveUrl && (
-                                  <Button
-                                    size="sm"
-                                    className="flex-1 bg-white text-primary hover:bg-white/90"
-                                    onClick={() => window.open(project.liveUrl, "_blank")}
-                                  >
-                                    <ExternalLink className="w-4 h-4 mr-2" />
-                                    Live Demo
-                                  </Button>
-                                )}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
+                              )}
+                            </div>
+                          </motion.div>
+                        )}
                       </Card>
                     </motion.div>
                   );
                 })}
-              </AnimatePresence>
-            </motion.div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
-        {/* Carousel Indicators */}
-        {filteredProjects.length > 3 && (
-          <div className="flex justify-center gap-2 mt-8">
-            {Array.from({ length: Math.ceil(filteredProjects.length / 3) }).map((_, idx) => (
-              <button title="btn"
+        {/* Pagination Indicators */}
+        {totalPages > 1 && (
+          <div className="flex justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8">
+            {Array.from({ length: totalPages }).map((_, idx) => (
+              <button
                 key={idx}
                 onClick={() => {
-                  setCurrentIndex(idx * 3);
-                  setIsAutoPlaying(false);
-                  setTimeout(() => setIsAutoPlaying(true), 10000);
+                  if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+                  setCurrentPage(idx);
+                  setTimeout(() => {
+                    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+                    autoPlayRef.current = setInterval(() => {
+                      setCurrentPage((prev) => (prev + 1) % totalPages);
+                    }, 6000);
+                  }, 10000);
                 }}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  Math.floor(currentIndex / 3) === idx
-                    ? "w-8 bg-gradient-to-r from-primary to-accent"
-                    : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 ${
+                  currentPage === idx
+                    ? "w-6 sm:w-8 bg-gradient-to-r from-primary to-accent"
+                    : "w-1.5 sm:w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
                 }`}
+                aria-label={`Go to page ${idx + 1}`}
               />
             ))}
           </div>
@@ -486,12 +514,13 @@ const ProjectsSection = () => {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="text-center mt-12"
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="text-center mt-8 sm:mt-10 md:mt-12"
         >
           <Button
             variant="outline"
-            className="group"
+            className="group text-sm sm:text-base"
             onClick={() => window.open("https://github.com/velan03", "_blank")}
           >
             <Github className="w-4 h-4 mr-2 group-hover:rotate-12 transition-transform" />
