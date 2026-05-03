@@ -1,15 +1,168 @@
-import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Sparkles, Download, Cloud, Brain, Cpu } from "lucide-react";
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
 import { useTypewriter } from "@/hooks/useTypewriter";
+import { useToast } from "@/hooks/use-toast";
 
 const HeroSection = () => {
   const { text } = useTypewriter({
-    words: ["Full Stack Developer", "Angular Expert", "React Enthusiast", "Java Developer", "Problem Solver"],
+    words: ["Full Stack Developer", "Angular Expert", "React Enthusiast", "Java Developer", "AWS Cloud", "AI/ML Enthusiast"],
     typeSpeed: 80,
     deleteSpeed: 40,
     delayBetweenWords: 2500,
   });
+  
+  const { toast } = useToast();
+
+  const handleDownloadResume = async () => {
+    try {
+      // First try to download from public folder
+      const response = await fetch('/resume/Velan_Resume.pdf');
+      
+      if (response.ok) {
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = blobUrl;
+        link.download = 'Velan_S_Resume.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(blobUrl);
+        
+        toast({
+          title: "Download Started",
+          description: "Your resume is being downloaded.",
+        });
+      } else {
+        // If PDF not found, generate resume on the fly
+        generateResumeOnTheFly();
+      }
+    } catch (error) {
+      console.error('Error downloading resume:', error);
+      generateResumeOnTheFly();
+    }
+  };
+
+  const generateResumeOnTheFly = () => {
+    // Create HTML content for resume
+    const resumeHTML = `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <title>Velan S - Resume</title>
+        <style>
+          body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #f5f5f5;
+          }
+          .container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          }
+          h1 { color: #2563eb; margin-bottom: 5px; }
+          h2 { color: #3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 5px; margin-top: 20px; }
+          .contact { display: flex; gap: 20px; flex-wrap: wrap; margin: 20px 0; }
+          .skill-tag { display: inline-block; background: #e5e7eb; padding: 5px 10px; border-radius: 5px; margin: 3px; font-size: 14px; }
+          .job { margin-bottom: 20px; }
+          .job-title { font-weight: bold; font-size: 18px; }
+          .company { color: #4b5563; }
+          .date { color: #6b7280; font-size: 14px; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <h1>Velan S</h1>
+          <p><strong>Frontend & Full Stack Engineer | AWS Cloud | AI/ML Enthusiast</strong></p>
+          
+          <div class="contact">
+            <div>📧 velansivasanakaran15@gmail.com</div>
+            <div>🔗 linkedin.com/in/velan-s-845791250</div>
+            <div>💻 github.com/velan03</div>
+            <div>🌐 velan-s.netlify.app</div>
+          </div>
+          
+          <h2>Professional Summary</h2>
+          <p>Software Engineer based in Chennai with 4+ years of experience building web applications used by 500+ users daily. Passionate about AWS Cloud services and AI/ML integration to create intelligent, scalable solutions. Strong expertise in Angular, React, TypeScript, and modern web technologies.</p>
+          
+          <h2>Skills</h2>
+          <p><strong>Frontend:</strong> Angular (17+), React.js, Next.js, TypeScript, JavaScript, PrimeNG, Tailwind CSS, Bootstrap 5, NgRx, Redux, RxJS</p>
+          <p><strong>Backend:</strong> Node.js, Spring Boot, Java, Python, RESTful APIs, WebSockets</p>
+          <p><strong>AWS Cloud:</strong> EC2, S3, Lambda, API Gateway, CloudFront, RDS, DynamoDB</p>
+          <p><strong>AI/ML:</strong> TensorFlow, PyTorch, Scikit-learn, OpenCV, Natural Language Processing, Computer Vision</p>
+          <p><strong>Tools:</strong> Git, Docker, Azure DevOps, MongoDB, MySQL, JWT, OAuth, CI/CD, GitHub Copilot, Cursor AI</p>
+          
+          <h2>Work Experience</h2>
+          <div class="job">
+            <div class="job-title">Software Engineer</div>
+            <div class="company">Tarkiz Infotech Pvt Ltd | Chennai, Tamil Nadu</div>
+            <div class="date">Jul 2024 - Present</div>
+            <ul>
+              <li>Architected enterprise web apps with Angular (20+) and TypeScript, serving 500+ concurrent users</li>
+              <li>Integrated RESTful APIs & WebSockets, boosting performance by 40%</li>
+              <li>Implemented NgRx & Redux state management, reducing bugs by 30%</li>
+              <li>Built reusable UI library, reducing development time by 25%</li>
+              <li>Exploring AWS services for cloud deployment and AI integration for intelligent features</li>
+            </ul>
+          </div>
+          
+          <div class="job">
+            <div class="job-title">Frontend & Data Analysis Intern</div>
+            <div class="company">Intrainz | Chennai, Tamil Nadu</div>
+            <div class="date">May 2023 - Jul 2023</div>
+            <ul>
+              <li>Built System Prices Checker with real-time API calls, cutting manual effort by 50%</li>
+              <li>Engineered data visualization dashboards, improving data interpretation by 30%</li>
+            </ul>
+          </div>
+          
+          <h2>Education</h2>
+          <p><strong>BE Computer Science Engineering</strong><br>
+          Sri Muthukumaran Institute of Technology<br>
+          CGPA: 8.39 | Graduated: June 2023</p>
+          
+          <h2>Certifications</h2>
+          <ul>
+            <li>AWS Certified Cloud Practitioner (In Progress)</li>
+            <li>Java Full Stack - QSpiders (Sep 2023 - May 2024)</li>
+            <li>Python & Data Science - Besant Technologies (2023)</li>
+          </ul>
+          
+          <h2>Key Achievements</h2>
+          <ul>
+            <li>Top performer in CSE department with CGPA 8.39</li>
+            <li>Built 4+ production-grade enterprise applications</li>
+            <li>35% productivity gain using AI tools (GitHub Copilot & Cursor AI)</li>
+            <li>Zero critical security incidents in production</li>
+          </ul>
+        </div>
+      </body>
+      </html>
+    `;
+    
+    const blob = new Blob([resumeHTML], { type: 'text/html' });
+    const blobUrl = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = blobUrl;
+    link.download = 'Velan_S_Resume.html';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(blobUrl);
+    
+    toast({
+      title: "Resume Generated",
+      description: "HTML resume downloaded. For PDF, please check the file in public/resume folder.",
+    });
+  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -67,7 +220,6 @@ const HeroSection = () => {
             delay: 1,
           }}
         />
-        {/* Third orb for depth */}
         <motion.div
           className="absolute top-1/2 right-1/3 w-[150px] sm:w-[200px] lg:w-[300px] h-[150px] sm:h-[200px] lg:h-[300px] rounded-full blur-[80px]"
           style={{ background: "radial-gradient(circle, hsl(220 100% 60% / 0.1) 0%, transparent 70%)" }}
@@ -135,7 +287,7 @@ const HeroSection = () => {
 
         {/* Main heading */}
         <motion.div variants={itemVariants}>
-          <h1 className="flex gap-2 justify-center text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6">
+          <h1 className="flex gap-2 justify-center text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-4 sm:mb-6 flex-wrap">
             <motion.span
               className="block text-foreground mb-2"
               initial={{ opacity: 0, x: -50 }}
@@ -192,37 +344,70 @@ const HeroSection = () => {
           />
         </motion.div>
 
-        {/* Description */}
+        {/* Description with AWS and AI/ML highlights */}
         <motion.p
           variants={itemVariants}
           className="max-w-xl lg:max-w-2xl mx-auto text-sm sm:text-base lg:text-lg text-muted-foreground mb-8 sm:mb-12 leading-relaxed px-2"
         >
           Software Engineer crafting elegant web solutions with{" "}
           <motion.span
-            className="text-primary font-semibold"
+            className="text-primary font-semibold inline-block"
             whileHover={{ scale: 1.1 }}
-            style={{ display: "inline-block" }}
           >
             Java
           </motion.span>
           ,{" "}
           <motion.span
-            className="text-primary font-semibold"
+            className="text-primary font-semibold inline-block"
             whileHover={{ scale: 1.1 }}
-            style={{ display: "inline-block" }}
           >
             Angular
           </motion.span>
-          , and{" "}
+          ,{" "}
           <motion.span
-            className="text-primary font-semibold"
+            className="text-primary font-semibold inline-block"
             whileHover={{ scale: 1.1 }}
-            style={{ display: "inline-block" }}
           >
             React
           </motion.span>
-          . Passionate about building scalable applications that make an impact.
+          , and exploring{" "}
+          <motion.span
+            className="text-accent font-semibold inline-block"
+            whileHover={{ scale: 1.1 }}
+          >
+            <Cloud className="inline w-4 h-4 mx-0.5" /> AWS Cloud
+          </motion.span>
+          {" "}with{" "}
+          <motion.span
+            className="text-accent font-semibold inline-block"
+            whileHover={{ scale: 1.1 }}
+          >
+            <Brain className="inline w-4 h-4 mx-0.5" /> AI/ML
+          </motion.span>
+          . Passionate about building intelligent, scalable applications.
         </motion.p>
+
+        {/* Tech stack badges */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12"
+        >
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 rounded-full">
+            <Cloud className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
+            <span className="text-xs sm:text-sm">AWS</span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-accent/10 rounded-full">
+            <Brain className="w-3 h-3 sm:w-4 sm:h-4 text-accent" />
+            <span className="text-xs sm:text-sm">AI/ML</span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full">
+            <Cpu className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="text-xs sm:text-sm">TensorFlow</span>
+          </div>
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-secondary rounded-full">
+            <span className="text-xs sm:text-sm">OpenCV</span>
+          </div>
+        </motion.div>
 
         {/* CTA Buttons */}
         <motion.div
@@ -244,12 +429,25 @@ const HeroSection = () => {
               <span className="relative z-10">Get In Touch</span>
             </Button>
           </motion.div>
+          
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Button
               variant="outline"
               size="lg"
               className="w-full sm:w-auto border-border hover:border-primary hover:bg-primary/5 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg transition-all group"
-              onClick={() => document.getElementById("experience")?.scrollIntoView({ behavior: "smooth" })}
+              onClick={handleDownloadResume}
+            >
+              <Download className="w-4 h-4 sm:w-5 sm:h-5 mr-2 group-hover:animate-bounce" />
+              <span>Download Resume</span>
+            </Button>
+          </motion.div>
+          
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto border-border hover:border-primary hover:bg-primary/5 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg transition-all"
+              onClick={() => document.getElementById("my-work")?.scrollIntoView({ behavior: "smooth" })}
             >
               <span>View My Work</span>
               <motion.span
@@ -270,8 +468,8 @@ const HeroSection = () => {
         >
           {[
             { href: "https://www.linkedin.com/in/velan-s-845791250", icon: Linkedin, label: "LinkedIn" },
-            { href: "mailto:velansivasankaran15@gmail.com", icon: Mail, label: "Email" },
-            { href: "https://github.com", icon: Github, label: "GitHub" },
+            { href: "mailto:velansivasanakaran15@gmail.com", icon: Mail, label: "Email" },
+            { href: "https://github.com/velan03", icon: Github, label: "GitHub" },
           ].map((social, index) => (
             <motion.a
               key={social.label}
@@ -292,21 +490,6 @@ const HeroSection = () => {
               />
             </motion.a>
           ))}
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          className="absolute bottom-4 sm:bottom-8 left-1/2 -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-          <motion.div
-            className="flex flex-col items-center gap-2 text-muted-foreground"
-            whileHover={{ color: "hsl(190 100% 50%)" }}
-          >
-            {/* <span className="text-xs font-medium tracking-wider hidden sm:block">SCROLL</span>
-            <ArrowDown className="w-5 h-5 sm:w-6 sm:h-6" /> */}
-          </motion.div>
         </motion.div>
       </motion.div>
     </section>
