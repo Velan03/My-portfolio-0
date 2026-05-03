@@ -13,20 +13,9 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'terser',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'react-vendor': ['react', 'react-dom', 'react-router-dom'],
-          'ui-vendor': ['framer-motion', 'lucide-react', '@radix-ui/react-*'],
-        },
-      },
-    },
     chunkSizeWarningLimit: 1000,
   },
   server: {
     port: 8080,
-  },
-  define: {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
   },
 })
