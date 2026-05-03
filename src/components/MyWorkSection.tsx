@@ -43,7 +43,7 @@ const projectsData: Project[] = [
     id: 1,
     title: "Human Resource Management System (HRMS)",
     description: "Enterprise HR platform with role-based dashboards for attendance, leave approval, and analytics.",
-    longDescription: "A comprehensive HR management system serving 500+ concurrent users with Micro Frontend architecture. Features include real-time attendance tracking, automated payroll processing, employee self-service portals, and advanced analytics dashboards.",
+    longDescription: "A comprehensive HR management system serving 500+ concurrent users with Micro Frontend architecture.",
     category: "fullstack",
     technologies: ["Angular", "NgRx", "PrimeNG", "TypeScript", "Node.js", "MongoDB"],
     githubUrl: "https://github.com/velan03/hrms-system",
@@ -57,7 +57,7 @@ const projectsData: Project[] = [
     id: 2,
     title: "AI-Powered Chat Application",
     description: "ChatGPT-style conversational UI with real-time streaming and GenAI/LLM backend.",
-    longDescription: "A sophisticated chat application integrating with OpenAI's GPT API featuring real-time message streaming, conversation history, code syntax highlighting, and markdown support.",
+    longDescription: "A sophisticated chat application integrating with OpenAI's GPT API.",
     category: "ai-ml",
     technologies: ["React.js", "TypeScript", "Node.js", "WebSockets", "Redux", "Docker"],
     githubUrl: "https://github.com/velan03/ai-chat-app",
@@ -71,7 +71,7 @@ const projectsData: Project[] = [
     id: 3,
     title: "AI-FACE-MASK DETECTION",
     description: "Real-time face mask detection using AI and computer vision for safety compliance.",
-    longDescription: "A real-time face mask detection system using deep learning and computer vision. Features include live webcam detection, image upload processing, and high accuracy.",
+    longDescription: "A real-time face mask detection system using deep learning and computer vision.",
     category: "ai-ml",
     technologies: ["Python", "OpenCV", "TensorFlow", "Keras", "Flask"],
     githubUrl: "https://github.com/velan03/AI-FACE-MASK-DETECTION",
@@ -84,7 +84,7 @@ const projectsData: Project[] = [
     id: 4,
     title: "Ayurvedic Wellness Site",
     description: "Digital platform for Ayurvedic consultations, product catalog, and wellness guidance.",
-    longDescription: "A comprehensive Ayurvedic wellness platform featuring online consultations with certified practitioners, authentic Ayurvedic product catalog, personalized wellness recommendations, and educational blog content.",
+    longDescription: "A comprehensive Ayurvedic wellness platform featuring online consultations.",
     category: "website",
     technologies: ["React.js", "TypeScript", "Tailwind CSS", "Node.js", "MongoDB", "Razorpay"],
     githubUrl: "https://github.com/Velan03/AYURVEDIC",
@@ -98,7 +98,7 @@ const projectsData: Project[] = [
     id: 5,
     title: "Portfolio Website 2025",
     description: "Modern portfolio with 3D animations and interactive UI components.",
-    longDescription: "A cutting-edge portfolio website featuring smooth scroll animations, dark/light mode, and an AI-powered chatbot assistant. Built with performance and accessibility in mind.",
+    longDescription: "A cutting-edge portfolio website with smooth scroll animations and dark/light mode.",
     category: "website",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     githubUrl: "https://github.com/velan03/My-portfolio-0",
@@ -112,7 +112,7 @@ const projectsData: Project[] = [
     id: 6,
     title: "Pharmacy Management System",
     description: "Complete pharmacy solution with inventory tracking, prescription management, and billing.",
-    longDescription: "A full-featured pharmacy management system including medicine inventory with expiry tracking, prescription management, barcode scanning, sales reports, and GST-compliant invoicing.",
+    longDescription: "A full-featured pharmacy management system with inventory and prescription tracking.",
     category: "fullstack",
     technologies: ["Angular", "Spring Boot", "MySQL", "Bootstrap", "Java", "Hibernate"],
     githubUrl: "https://github.com/velan03/pharmacy",
@@ -126,7 +126,7 @@ const projectsData: Project[] = [
     id: 7,
     title: "Handmade Ornaments Shop",
     description: "E-commerce platform for traditional handmade jewelry and ornamental crafts.",
-    longDescription: "A beautiful e-commerce platform showcasing traditional handmade ornaments including temple jewelry, kundan work, pearl sets, and antique pieces with secure checkout.",
+    longDescription: "A beautiful e-commerce platform for traditional handmade ornaments.",
     category: "ecommerce",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "MongoDB", "Cloudinary"],
     githubUrl: "https://github.com/Velan03/HAND-MADE-ORNAMENTS",
@@ -140,7 +140,7 @@ const projectsData: Project[] = [
     id: 8,
     title: "Smart Billing System",
     description: "Modern billing and invoicing solution for retail businesses with analytics.",
-    longDescription: "A comprehensive billing system featuring POS interface, invoice generation, barcode scanning, multiple payment methods, customer loyalty program, GST calculations, and real-time analytics.",
+    longDescription: "A comprehensive billing system with POS interface and real-time analytics.",
     category: "fullstack",
     technologies: ["React.js", "Node.js", "Express", "PostgreSQL", "Tailwind CSS", "Socket.io"],
     githubUrl: "https://github.com/velan03/billing-v1",
@@ -154,7 +154,7 @@ const projectsData: Project[] = [
     id: 9,
     title: "Fashion E-Commerce Store",
     description: "Modern fashion store with AI-powered size recommendations.",
-    longDescription: "An innovative fashion e-commerce platform featuring AI-powered size recommendations, virtual try-on, personalized product suggestions, and seamless checkout experience.",
+    longDescription: "An innovative fashion e-commerce platform with AI-powered recommendations.",
     category: "ecommerce",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "PostgreSQL"],
     githubUrl: "https://github.com/velan03/like-n-pick",
@@ -168,7 +168,7 @@ const projectsData: Project[] = [
     id: 10,
     title: "Task Management Dashboard",
     description: "Kanban-style task manager with drag-drop and team collaboration features.",
-    longDescription: "A Trello-like task management system with drag-and-drop functionality, team workspaces, real-time updates, file attachments, and activity logging.",
+    longDescription: "A Trello-like task management system with drag-and-drop functionality.",
     category: "website",
     technologies: ["React", "Redux", "Node.js", "Socket.io", "MongoDB"],
     githubUrl: "https://github.com/velan03/task-dashboard",
@@ -182,7 +182,7 @@ const projectsData: Project[] = [
     id: 11,
     title: "Computer Vision Object Detection",
     description: "Real-time object detection using YOLO and OpenCV with webcam integration.",
-    longDescription: "Built a real-time object detection system using YOLOv8 and OpenCV. Features live webcam detection, image upload processing, and custom model training capabilities.",
+    longDescription: "A real-time object detection system using YOLOv8 and OpenCV.",
     category: "ai-ml",
     technologies: ["Python", "OpenCV", "TensorFlow", "Flask", "React"],
     githubUrl: "https://github.com/velan03/object-detection",
@@ -204,7 +204,6 @@ const categories = [
 const ProjectsSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [currentPage, setCurrentPage] = useState(0);
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const autoPlayRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -388,8 +387,6 @@ const ProjectsSection: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: idx * 0.1 }}
                       whileHover={{ y: -4 }}
-                      onHoverStart={() => setHoveredProject(project.id)}
-                      onHoverEnd={() => setHoveredProject(null)}
                       className="h-full"
                     >
                       <Card className="group relative h-full overflow-hidden bg-gradient-to-br from-card to-secondary/30 border-border/50 hover:border-primary/30 transition-all duration-300">
@@ -500,44 +497,6 @@ const ProjectsSection: React.FC = () => {
                             )}
                           </div>
                         </div>
-
-                        {/* Hover Overlay - Desktop only */}
-                        {hoveredProject === project.id && !isMobile && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="absolute inset-0 bg-gradient-to-br from-primary/95 to-accent/95 backdrop-blur-sm p-4 sm:p-5 flex flex-col justify-between"
-                          >
-                            <div>
-                              <h4 className="text-white font-bold text-sm sm:text-base mb-2">About this project</h4>
-                              <p className="text-white/80 text-xs sm:text-sm line-clamp-5">
-                                {project.longDescription}
-                              </p>
-                            </div>
-                            <div className="flex gap-2 mt-3">
-                              <Button
-                                size="sm"
-                                variant="secondary"
-                                className="flex-1 h-8 text-xs"
-                                onClick={() => window.open(project.githubUrl, "_blank")}
-                              >
-                                <Github className="w-3 h-3 mr-1" />
-                                View Code
-                              </Button>
-                              {project.liveUrl && (
-                                <Button
-                                  size="sm"
-                                  className="flex-1 h-8 text-xs bg-white text-primary hover:bg-white/90"
-                                  onClick={() => window.open(project.liveUrl, "_blank")}
-                                >
-                                  <ExternalLink className="w-3 h-3 mr-1" />
-                                  Live Demo
-                                </Button>
-                              )}
-                            </div>
-                          </motion.div>
-                        )}
                       </Card>
                     </motion.div>
                   );
