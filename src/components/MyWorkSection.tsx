@@ -28,7 +28,8 @@ interface Project {
   technologies: string[];
   githubUrl: string;
   liveUrl?: string;
-  image?: string;
+  imageUrl?: string;
+  bgGradient?: string;
   featured: boolean;
   stats?: {
     stars?: number;
@@ -42,11 +43,13 @@ const projectsData: Project[] = [
     id: 1,
     title: "Human Resource Management System (HRMS)",
     description: "Enterprise HR platform with role-based dashboards for attendance, leave approval, and analytics.",
-    longDescription: "A comprehensive HR management system serving 500+ concurrent users with Micro Frontend architecture. Features include real-time attendance tracking, automated payroll processing, employee self-service portals, and advanced analytics dashboards. Built with Angular and NgRx for state management.",
+    longDescription: "A comprehensive HR management system serving 500+ concurrent users with Micro Frontend architecture. Features include real-time attendance tracking, automated payroll processing, employee self-service portals, and advanced analytics dashboards.",
     category: "fullstack",
     technologies: ["Angular", "NgRx", "PrimeNG", "TypeScript", "Node.js", "MongoDB"],
     githubUrl: "https://github.com/velan03/hrms-system",
     liveUrl: "",
+    imageUrl: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=800&h=400&fit=crop",
+    bgGradient: "from-indigo-600 to-blue-600",
     featured: true,
     stats: { stars: 45, forks: 12, views: 1200 }
   },
@@ -54,75 +57,101 @@ const projectsData: Project[] = [
     id: 2,
     title: "AI-Powered Chat Application",
     description: "ChatGPT-style conversational UI with real-time streaming and GenAI/LLM backend.",
-    longDescription: "A sophisticated chat application integrating with OpenAI's GPT API featuring real-time message streaming, conversation history, code syntax highlighting, and markdown support. Containerized with Docker for scalable deployments.",
+    longDescription: "A sophisticated chat application integrating with OpenAI's GPT API featuring real-time message streaming, conversation history, code syntax highlighting, and markdown support.",
     category: "ai-ml",
     technologies: ["React.js", "TypeScript", "Node.js", "WebSockets", "Redux", "Docker"],
     githubUrl: "https://github.com/velan03/ai-chat-app",
     liveUrl: "",
+    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+    bgGradient: "from-green-600 to-emerald-600",
     featured: true,
     stats: { stars: 128, forks: 34, views: 3500 }
   },
   {
     id: 3,
     title: "AI-FACE-MASK DETECTION",
-    description: "Appointment booking system with secure role-based access for patients and doctors.",
-    longDescription: "A HIPAA-compliant healthcare platform enabling patients to book appointments, video consultations, prescription management, and medical records access. Features real-time availability tracking and automated reminders.",
-    category: "fullstack",
-    technologies: ["Angular", "PrimeNG", "NgRx", "TypeScript", "Spring Boot", "PostgreSQL"],
-    githubUrl: "https://github.com/velan03//AI-FACE-MASK-DETECTION",
-    // liveUrl: "https://healthcare-demo.vercel.app",
+    description: "Real-time face mask detection using AI and computer vision for safety compliance.",
+    longDescription: "A real-time face mask detection system using deep learning and computer vision. Features include live webcam detection, image upload processing, and high accuracy.",
+    category: "ai-ml",
+    technologies: ["Python", "OpenCV", "TensorFlow", "Keras", "Flask"],
+    githubUrl: "https://github.com/velan03/AI-FACE-MASK-DETECTION",
+    imageUrl: "https://images.unsplash.com/photo-1585435557343-3b092031a831?w=800&h=400&fit=crop",
+    bgGradient: "from-teal-600 to-cyan-600",
     featured: true,
     stats: { stars: 67, forks: 18, views: 2100 }
   },
   {
     id: 4,
-    title: "E-Commerce Flower Shop",
-    description: "Full-stack flower e-commerce platform with dynamic catalog and secure checkout.",
-    longDescription: "A modern e-commerce platform featuring product catalog with filters, shopping cart, wishlist, user authentication, order tracking, and payment integration. Optimized UX reduced cart abandonment by 30%.",
-    category: "ecommerce",
-    technologies: ["React.js", "Tailwind CSS", "Material UI", "JavaScript", "MongoDB", "Stripe"],
-    githubUrl: "https://github.com/velan03/flower-shop",
-    liveUrl: "https://flower-shop.vercel.app",
+    title: "Ayurvedic Wellness Site",
+    description: "Digital platform for Ayurvedic consultations, product catalog, and wellness guidance.",
+    longDescription: "A comprehensive Ayurvedic wellness platform featuring online consultations with certified practitioners, authentic Ayurvedic product catalog, personalized wellness recommendations, and educational blog content.",
+    category: "website",
+    technologies: ["React.js", "TypeScript", "Tailwind CSS", "Node.js", "MongoDB", "Razorpay"],
+    githubUrl: "https://github.com/Velan03/AYURVEDIC",
+    liveUrl: "https://ayurvedic-eight.vercel.app/",
+    imageUrl: "https://images.unsplash.com/photo-1584308666744-24d5c6d08dc8?w=800&h=400&fit=crop",
+    bgGradient: "from-emerald-600 to-green-600",
     featured: true,
-    stats: { stars: 89, forks: 23, views: 3100 }
+    stats: { stars: 34, forks: 9, views: 980 }
   },
   {
     id: 5,
     title: "Portfolio Website 2025",
     description: "Modern portfolio with 3D animations and interactive UI components.",
-    longDescription: "A cutting-edge portfolio website featuring smooth scroll animations, dark/light mode, and an AI-powered chatbot assistant. Built with performance and accessibility in mind using modern React patterns.",
+    longDescription: "A cutting-edge portfolio website featuring smooth scroll animations, dark/light mode, and an AI-powered chatbot assistant. Built with performance and accessibility in mind.",
     category: "website",
     technologies: ["React", "TypeScript", "Tailwind CSS", "Framer Motion"],
     githubUrl: "https://github.com/velan03/My-portfolio-0",
     liveUrl: "https://velan-s.netlify.app",
+    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+    bgGradient: "from-purple-600 to-pink-600",
     featured: true,
     stats: { stars: 156, forks: 42, views: 5000 }
   },
   {
     id: 6,
-    title: "Task Management Dashboard",
-    description: "Kanban-style task manager with drag-drop and team collaboration features.",
-    longDescription: "A Trello-like task management system with drag-and-drop functionality, team workspaces, real-time updates, file attachments, and activity logging. Built for small to medium teams.",
-    category: "website",
-    technologies: ["React", "Redux", "Node.js", "Socket.io", "MongoDB"],
-    githubUrl: "https://github.com/velan03/task-dashboard",
-    liveUrl: " ",
-    featured: false,
-    stats: { stars: 67, forks: 15, views: 1800 }
+    title: "Pharmacy Management System",
+    description: "Complete pharmacy solution with inventory tracking, prescription management, and billing.",
+    longDescription: "A full-featured pharmacy management system including medicine inventory with expiry tracking, prescription management, barcode scanning, sales reports, and GST-compliant invoicing.",
+    category: "fullstack",
+    technologies: ["Angular", "Spring Boot", "MySQL", "Bootstrap", "Java", "Hibernate"],
+    githubUrl: "https://github.com/velan03/pharmacy",
+    liveUrl: "https://pharmacy-ten-jet.vercel.app",
+    imageUrl: "https://images.unsplash.com/photo-1584308666744-24d5c6d08dc8?w=800&h=400&fit=crop",
+    bgGradient: "from-blue-600 to-indigo-600",
+    featured: true,
+    stats: { stars: 56, forks: 14, views: 1560 }
   },
   {
     id: 7,
-    title: "Computer Vision Object Detection",
-    description: "Real-time object detection using YOLO and OpenCV with webcam integration.",
-    longDescription: "Built a real-time object detection system using YOLOv8 and OpenCV. Features include live webcam detection, image upload processing, and custom model training capabilities.",
-    category: "ai-ml",
-    technologies: ["Python", "OpenCV", "TensorFlow", "Flask", "React"],
-    githubUrl: "https://github.com/velan03/object-detection",
-    featured: false,
-    stats: { stars: 234, forks: 56, views: 8900 }
+    title: "Handmade Ornaments Shop",
+    description: "E-commerce platform for traditional handmade jewelry and ornamental crafts.",
+    longDescription: "A beautiful e-commerce platform showcasing traditional handmade ornaments including temple jewelry, kundan work, pearl sets, and antique pieces with secure checkout.",
+    category: "ecommerce",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "MongoDB", "Cloudinary"],
+    githubUrl: "https://github.com/Velan03/HAND-MADE-ORNAMENTS",
+    liveUrl: "",
+    imageUrl: "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=800&h=400&fit=crop",
+    bgGradient: "from-amber-600 to-orange-600",
+    featured: true,
+    stats: { stars: 78, forks: 21, views: 2340 }
   },
   {
     id: 8,
+    title: "Smart Billing System",
+    description: "Modern billing and invoicing solution for retail businesses with analytics.",
+    longDescription: "A comprehensive billing system featuring POS interface, invoice generation, barcode scanning, multiple payment methods, customer loyalty program, GST calculations, and real-time analytics.",
+    category: "fullstack",
+    technologies: ["React.js", "Node.js", "Express", "PostgreSQL", "Tailwind CSS", "Socket.io"],
+    githubUrl: "https://github.com/velan03/billing-v1",
+    liveUrl: "https://billing-v1.vercel.app/",
+    imageUrl: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop",
+    bgGradient: "from-rose-600 to-red-600",
+    featured: true,
+    stats: { stars: 92, forks: 27, views: 2870 }
+  },
+  {
+    id: 9,
     title: "Fashion E-Commerce Store",
     description: "Modern fashion store with AI-powered size recommendations.",
     longDescription: "An innovative fashion e-commerce platform featuring AI-powered size recommendations, virtual try-on, personalized product suggestions, and seamless checkout experience.",
@@ -130,8 +159,37 @@ const projectsData: Project[] = [
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe", "PostgreSQL"],
     githubUrl: "https://github.com/velan03/like-n-pick",
     liveUrl: "https://like-n-pick.vercel.app/",
+    imageUrl: "https://images.unsplash.com/photo-1445205170230-053b83016050?w=800&h=400&fit=crop",
+    bgGradient: "from-fuchsia-600 to-purple-600",
     featured: false,
     stats: { stars: 45, forks: 11, views: 1500 }
+  },
+  {
+    id: 10,
+    title: "Task Management Dashboard",
+    description: "Kanban-style task manager with drag-drop and team collaboration features.",
+    longDescription: "A Trello-like task management system with drag-and-drop functionality, team workspaces, real-time updates, file attachments, and activity logging.",
+    category: "website",
+    technologies: ["React", "Redux", "Node.js", "Socket.io", "MongoDB"],
+    githubUrl: "https://github.com/velan03/task-dashboard",
+    liveUrl: "",
+    imageUrl: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=400&fit=crop",
+    bgGradient: "from-slate-600 to-gray-600",
+    featured: false,
+    stats: { stars: 67, forks: 15, views: 1800 }
+  },
+  {
+    id: 11,
+    title: "Computer Vision Object Detection",
+    description: "Real-time object detection using YOLO and OpenCV with webcam integration.",
+    longDescription: "Built a real-time object detection system using YOLOv8 and OpenCV. Features live webcam detection, image upload processing, and custom model training capabilities.",
+    category: "ai-ml",
+    technologies: ["Python", "OpenCV", "TensorFlow", "Flask", "React"],
+    githubUrl: "https://github.com/velan03/object-detection",
+    imageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=400&fit=crop",
+    bgGradient: "from-cyan-600 to-blue-600",
+    featured: false,
+    stats: { stars: 234, forks: 56, views: 8900 }
   }
 ];
 
@@ -161,7 +219,6 @@ const ProjectsSection: React.FC = () => {
     (currentPage + 1) * projectsPerPage
   );
 
-  // Check screen size
   useEffect(() => {
     const checkScreen = () => {
       setIsMobile(window.innerWidth < 768);
@@ -171,23 +228,27 @@ const ProjectsSection: React.FC = () => {
     return () => window.removeEventListener('resize', checkScreen);
   }, []);
 
-  // Auto-play functionality
   useEffect(() => {
-    if (totalPages > 1) {
+    if (totalPages > 1 && autoPlayRef.current === null) {
       autoPlayRef.current = setInterval(() => {
         setCurrentPage((prev) => (prev + 1) % totalPages);
       }, 6000);
     }
     return () => {
-      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+        autoPlayRef.current = null;
+      }
     };
   }, [totalPages]);
 
   const handlePrev = useCallback(() => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
     setTimeout(() => {
-      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
       autoPlayRef.current = setInterval(() => {
         setCurrentPage((prev) => (prev + 1) % totalPages);
       }, 6000);
@@ -195,10 +256,12 @@ const ProjectsSection: React.FC = () => {
   }, [totalPages]);
 
   const handleNext = useCallback(() => {
-    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    if (autoPlayRef.current) {
+      clearInterval(autoPlayRef.current);
+      autoPlayRef.current = null;
+    }
     setCurrentPage((prev) => (prev + 1) % totalPages);
     setTimeout(() => {
-      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
       autoPlayRef.current = setInterval(() => {
         setCurrentPage((prev) => (prev + 1) % totalPages);
       }, 6000);
@@ -216,8 +279,8 @@ const ProjectsSection: React.FC = () => {
   };
 
   return (
-    <section id="projects" className="relative py-16 sm:py-20 md:py-28 overflow-hidden">
-      {/* Background decoration - optimized for performance */}
+    <section id="projects" className="relative py-16 sm:py-20 md:py-28 overflow-hidden bg-background">
+      {/* Background decoration */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-20 left-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-primary/5 rounded-full blur-3xl" />
         <div className="absolute bottom-20 right-1/4 w-64 h-64 sm:w-96 sm:h-96 bg-accent/5 rounded-full blur-3xl" />
@@ -229,7 +292,7 @@ const ProjectsSection: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true }}
           className="text-center mb-10 sm:mb-14 md:mb-16"
         >
           <Badge className="mb-3 sm:mb-4 px-3 py-1 sm:px-4 sm:py-2 text-xs sm:text-sm bg-gradient-to-r from-primary/20 to-accent/20 border-none">
@@ -247,7 +310,7 @@ const ProjectsSection: React.FC = () => {
           </p>
         </motion.div>
 
-        {/* Category Filters - Scrollable on mobile */}
+        {/* Category Filters */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -277,16 +340,6 @@ const ProjectsSection: React.FC = () => {
                 >
                   <Icon className="w-3 h-3 sm:w-4 sm:h-4" />
                   <span className="whitespace-nowrap">{category.label}</span>
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeCategory"
-                      className="absolute inset-0 rounded-full -z-10"
-                      transition={{ type: "spring", duration: 0.5 }}
-                      style={{
-                        background: `linear-gradient(135deg, ${category.color.split(' ')[1].replace('to-', '')}, ${category.color.split(' ')[2]})`
-                      }}
-                    />
-                  )}
                 </button>
               );
             })}
@@ -295,19 +348,18 @@ const ProjectsSection: React.FC = () => {
 
         {/* Projects Carousel */}
         <div className="relative">
-          {/* Navigation Buttons - Hidden on mobile when only one page */}
           {totalPages > 1 && (
             <>
               <button
                 onClick={handlePrev}
-                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-50"
+                className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
                 aria-label="Previous projects"
               >
                 <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={handleNext}
-                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300 disabled:opacity-50"
+                className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-1.5 sm:p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-lg hover:bg-primary hover:text-white transition-all duration-300"
                 aria-label="Next projects"
               >
                 <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -315,7 +367,6 @@ const ProjectsSection: React.FC = () => {
             </>
           )}
 
-          {/* Projects Grid */}
           <div className="px-0 sm:px-8">
             <AnimatePresence mode="wait">
               <motion.div
@@ -342,38 +393,51 @@ const ProjectsSection: React.FC = () => {
                       className="h-full"
                     >
                       <Card className="group relative h-full overflow-hidden bg-gradient-to-br from-card to-secondary/30 border-border/50 hover:border-primary/30 transition-all duration-300">
-                        {/* Project Header with Gradient */}
-                        <div className={`relative h-32 sm:h-36 md:h-40 bg-gradient-to-br ${categoryColor} opacity-90 overflow-hidden`}>
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <CategoryIcon className="w-12 h-12 sm:w-16 sm:h-16 text-white/20" />
-                          </div>
-                          <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+                        {/* Project Header with Image/Background */}
+                        <div className="relative h-32 sm:h-36 md:h-40 overflow-hidden">
+                          {/* Background Image with Overlay */}
+                          <div 
+                            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+                            style={{ backgroundImage: `url(${project.imageUrl})` }}
+                          />
                           
+                          {/* Gradient Overlay */}
+                          <div className={`absolute inset-0 bg-gradient-to-br ${project.bgGradient || categoryColor} opacity-75`} />
+                          
+                          {/* Dark Gradient Overlay for better text contrast */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                          
+                          {/* Icon Center */}
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <CategoryIcon className="w-12 h-12 sm:w-16 sm:h-16 text-white/30" />
+                          </div>
+                          
+                          {/* Featured Badge */}
                           {project.featured && (
-                            <div className="absolute top-3 right-3">
+                            <div className="absolute top-3 right-3 z-10">
                               <Badge className="bg-black/50 backdrop-blur-sm text-white border-none text-[10px] sm:text-xs">
                                 <Star className="w-2 h-2 sm:w-3 sm:h-3 mr-1 fill-current" />
                                 Featured
                               </Badge>
                             </div>
                           )}
+                          
+                          {/* Category Badge on Image */}
+                          <div className="absolute bottom-3 left-3 z-10">
+                            <Badge className="bg-black/50 backdrop-blur-sm text-white border-none text-[10px] sm:text-xs">
+                              <CategoryIcon className="w-2 h-2 sm:w-3 sm:h-3 mr-1" />
+                              {project.category}
+                            </Badge>
+                          </div>
                         </div>
 
                         <div className="p-4 sm:p-5">
-                          <div className="mb-3">
-                            <div className="flex items-center gap-2 mb-2">
-                              <CategoryIcon className="w-3 h-3 sm:w-4 sm:h-4 text-primary" />
-                              <span className="text-[10px] sm:text-xs text-muted-foreground uppercase tracking-wider">
-                                {project.category}
-                              </span>
-                            </div>
-                            <h3 className=" text-base sm:text-lg md:text-xl font-bold mb-1 mt-11 sm:mb-2 line-clamp-1 group-hover:text-primary transition-colors">
-                              {project.title}
-                            </h3>
-                            <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">
-                              {project.description}
-                            </p>
-                          </div>
+                          <h3 className="text-base sm:text-lg md:text-xl font-bold mb-2 line-clamp-1 group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h3>
+                          <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2 mb-3">
+                            {project.description}
+                          </p>
 
                           {/* Technologies */}
                           <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
@@ -427,7 +491,7 @@ const ProjectsSection: React.FC = () => {
                             {project.liveUrl && (
                               <Button
                                 size="sm"
-                                className={`flex-1 h-8 sm:h-9 text-xs sm:text-sm bg-gradient-to-r ${categoryColor} hover:opacity-90`}
+                                className={`flex-1 h-8 sm:h-9 text-xs sm:text-sm bg-gradient-to-r ${project.bgGradient || categoryColor} hover:opacity-90 text-white`}
                                 onClick={() => window.open(project.liveUrl, "_blank")}
                               >
                                 <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
@@ -490,10 +554,12 @@ const ProjectsSection: React.FC = () => {
               <button
                 key={idx}
                 onClick={() => {
-                  if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+                  if (autoPlayRef.current) {
+                    clearInterval(autoPlayRef.current);
+                    autoPlayRef.current = null;
+                  }
                   setCurrentPage(idx);
                   setTimeout(() => {
-                    if (autoPlayRef.current) clearInterval(autoPlayRef.current);
                     autoPlayRef.current = setInterval(() => {
                       setCurrentPage((prev) => (prev + 1) % totalPages);
                     }, 6000);
